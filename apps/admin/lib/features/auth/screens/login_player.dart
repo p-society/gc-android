@@ -1,4 +1,5 @@
-import 'package:admin/textfield_login.dart';
+import 'package:admin/features/auth/screens/signUp_page.dart';
+import 'package:admin/features/auth/screens/textfield_login.dart';
 import 'package:flutter/material.dart';
 
 class LoginPagePlayer extends StatelessWidget {
@@ -122,7 +123,12 @@ class LoginPagePlayer extends StatelessWidget {
                                   GestureDetector(
                                     //making signup text clickabe
                                     onTap: () {
-                                      print('signup clicked');
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SignUpPage(),
+                                        ),
+                                      );
                                     },
                                     child: const Text(
                                       'Sign Up',

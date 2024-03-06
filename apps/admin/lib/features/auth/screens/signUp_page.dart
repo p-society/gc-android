@@ -1,4 +1,4 @@
-import 'package:admin/textfield_login.dart';
+import 'package:admin/features/auth/screens/textfield_login.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -7,6 +7,11 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFF111114),
+        elevation: 0,
+        foregroundColor: Colors.white,
+      ),
       resizeToAvoidBottomInset: true,
       body: Padding(
         padding: const EdgeInsets.all(0.0),

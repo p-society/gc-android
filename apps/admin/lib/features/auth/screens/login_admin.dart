@@ -1,6 +1,6 @@
-import 'package:admin/textfield_login.dart';
+import 'package:admin/features/auth/screens/signUp_page.dart';
+import 'package:admin/features/auth/screens/textfield_login.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class LoginPageAdmin extends StatelessWidget {
   const LoginPageAdmin({super.key});
@@ -56,7 +56,7 @@ class LoginPageAdmin extends StatelessWidget {
                     const SizedBox(
                       height: 18,
                     ),
-                    AspectRatio(
+                    const AspectRatio(
                       aspectRatio: 16 / 9,
                       child: Image(
                           image: AssetImage(
@@ -118,7 +118,11 @@ class LoginPageAdmin extends StatelessWidget {
                           GestureDetector(
                             //making signup text clickable
                             onTap: () {
-                              print('signup clicked');
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const SignUpPage(),
+                                ),
+                              );
                             },
                             child: const Text(
                               'Sign Up',

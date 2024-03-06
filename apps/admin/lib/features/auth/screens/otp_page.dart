@@ -1,4 +1,4 @@
-import 'package:admin/login_admin.dart';
+import 'package:admin/features/auth/screens/login_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
