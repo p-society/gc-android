@@ -1,9 +1,11 @@
 import 'package:admin/features/auth/screens/login_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
