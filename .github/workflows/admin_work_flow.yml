@@ -12,16 +12,15 @@ jobs:
         runs-on: windows-latest
         steps:
         - uses: actions/checkout@v1
-        
-        - name: Navigate to Admin App
-          run: cd "apps/admin"
-
 
         - name: Flutter set up
           uses: subosito/flutter-action@v1
           with:
             flutter-version: 3.19
-        
+
+        - name: Navigate to Admin App
+          run: cd "apps/admin"
+          
         - name: Clean Build
           run: flutter clean
         
