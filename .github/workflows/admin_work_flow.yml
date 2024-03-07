@@ -3,6 +3,7 @@ on:
     pull_request:
         branches:
             - auth-admin
+            - main
 jobs:
     set-up-environment:
         runs-on: windows-latest
@@ -26,12 +27,3 @@ jobs:
 
         - name: Build Apk Release
           run: flutter build apk --split-per-abi
-
-        
-
-        
-          
-        
-        
-
-         
