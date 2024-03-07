@@ -4,6 +4,9 @@ on:
         branches:
             - auth-admin
             - main
+    push:
+        branches:
+            - main
 jobs:
     set-up-environment:
         runs-on: windows-latest
