@@ -13,8 +13,8 @@ jobs:
         steps:
         - uses: actions/checkout@v1
         
-        - name: Navigate to Admin App
-          run: cd apps\admin
+        # - name: Navigate to Admin App
+        #   run: cd apps\admin
 
 
         - name: Flutter set up
@@ -24,9 +24,12 @@ jobs:
         
         - name: Clean Build
           run: flutter clean
+          working-directory: apps/admin
         
         - name: Getting Dependencies
           run: flutter pub get
+          working-directory: apps/admin
 
         - name: Build Apk Release
           run: flutter build apk --split-per-abi
+          working-directory: apps/admin
