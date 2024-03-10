@@ -1,4 +1,5 @@
 import 'package:admin/features/auth/repository/auth_repository.dart';
+import 'package:admin/features/auth/screens/otp_page.dart';
 import 'package:admin/features/auth/screens/textfield_login.dart';
 import 'package:admin/models/player_model.dart';
 import 'package:flutter/material.dart';
@@ -107,10 +108,26 @@ class LoginPageAdmin extends ConsumerWidget {
                     width: 320,
                     child: TextButton(
                       onPressed: () {
-                        ref.read(AuthRepositoryProvider).clickRegister(
+                        ref
+                            .read(AuthRepositoryProvider)
+                            .clickRegister(
                               player,
                               context,
-                            );
+                            )
+                            .then((value) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => const OtpPage(),
+                            ),
+                          );
+                        }).catchError((error) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                           const SnackBar(
+                              content: Text(
+                                  'Registration failed. Please try again later.'),
+                            ),
+                          );
+                        });
                       },
                       style: TextButton.styleFrom(
                           shape: RoundedRectangleBorder(
