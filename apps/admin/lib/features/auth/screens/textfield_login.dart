@@ -6,12 +6,16 @@ class TextfieldLogin extends StatefulWidget {
   final String hintText;
   final TextInputType textInputType;
   final ValueChanged onChange;
+  final bool obscureText;
+  final bool isPassword;
   const TextfieldLogin({
     super.key,
     required this.aboveText,
     required this.hintText,
     required this.textInputType,
     required this.onChange,
+    this.obscureText = false,
+    this.isPassword = false,
   });
 
   @override
@@ -26,6 +30,8 @@ class _TextfieldLoginState extends State<TextfieldLogin> {
     super.dispose();
   }
 
+  bool _obscureText = false;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -39,12 +45,30 @@ class _TextfieldLoginState extends State<TextfieldLogin> {
           style: const TextStyle(color: Colors.white),
         ),
         TextField(
-          onChanged: widget.onChange,
+          onSubmitted: widget.onChange,
           controller: _controller,
+          obscureText: _obscureText,
           decoration: InputDecoration(
               hintText: widget.hintText,
               filled: true,
               fillColor: Colors.white,
+              suffixIcon: widget.isPassword
+                  ? GestureDetector(
+                      onTap: () {
+                        _obscureText = !_obscureText;
+                        setState(() {});
+                      },
+                      child: _obscureText
+                          ? const Icon(
+                              Icons.visibility_off_outlined,
+                              color: Colors.grey,
+                            )
+                          : const Icon(
+                              Icons.visibility,
+                              color: Color.fromRGBO(225, 25, 109, 1),
+                            ),
+                    )
+                  : null,
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
               enabledBorder: const OutlineInputBorder(

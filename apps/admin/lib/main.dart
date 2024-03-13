@@ -1,4 +1,4 @@
-import 'package:admin/features/auth/screens/login_admin.dart';
+import 'package:admin/features/auth/screens/Login-Screens/first_login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const LoginPageAdmin(),
+      home: const FirstLoginScreen(),
     );
   }
 }

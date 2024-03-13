@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:admin/constants/scaffold_messenger.dart';
 import 'package:admin/models/player_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -41,7 +42,8 @@ class AuthRepository {
     String myData = jsonEncode(decoded);
     try {
       print('Enter in Try block Register Button');
-
+      MyScaffoldMessage()
+          .showScaffoldMessenge(context: context, content: player.password);
       var response = await http.post(
         Uri.parse(url),
         body: myData,

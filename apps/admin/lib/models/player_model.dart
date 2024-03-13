@@ -1,3 +1,20 @@
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+// final playerProvider = StateProvider<Player>(
+//   (ref) => Player(
+//     'email',
+//     'firstName',
+//     'lastName',
+//     'ha',
+//     'role',
+//     'sport',
+//     'branch',
+//     0,
+//     'contactNo',
+//     [],
+//   ),
+// );
+
 class Player {
   final String email;
   final String firstName;
@@ -54,6 +71,35 @@ class Player {
           (x) => x,
         ),
       ),
+    );
+  }
+  Player updatePlayer(Player player) {
+    return player;
+  }
+
+  Player copyWith({
+    String? email,
+    String? firstName,
+    String? lastName,
+    String? password,
+    String? role,
+    String? sport,
+    String? branch,
+    int? year,
+    String? contactNo,
+    List<Map<String, String>>? socials,
+  }) {
+    return Player(
+      email ?? this.email,
+      firstName ?? this.firstName,
+      lastName ?? this.lastName,
+      password ?? this.password,
+      role ?? this.role,
+      sport ?? this.sport,
+      branch ?? this.branch,
+      year ?? this.year,
+      contactNo ?? this.contactNo,
+      socials ?? this.socials,
     );
   }
 }
