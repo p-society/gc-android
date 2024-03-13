@@ -1,11 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 class TextfieldLogin extends StatefulWidget {
   final String aboveText;
   final String hintText;
   final TextInputType textInputType;
-  final ValueChanged onChange;
+  final ValueChanged<String> onChange;
   final bool obscureText;
   final bool isPassword;
   const TextfieldLogin({
@@ -45,7 +44,7 @@ class _TextfieldLoginState extends State<TextfieldLogin> {
           style: const TextStyle(color: Colors.white),
         ),
         TextField(
-          onSubmitted: widget.onChange,
+          onChanged: widget.onChange,
           controller: _controller,
           obscureText: _obscureText,
           decoration: InputDecoration(

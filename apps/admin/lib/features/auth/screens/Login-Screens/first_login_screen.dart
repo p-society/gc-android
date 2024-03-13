@@ -1,12 +1,39 @@
+import 'package:admin/constants/scaffold_messenger.dart';
+import 'package:admin/features/auth/repository/player_provider.dart';
 import 'package:admin/features/auth/screens/Login-Screens/second_login_screen.dart';
 import 'package:admin/features/auth/screens/textfield_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FirstLoginScreen extends ConsumerWidget {
+class FirstLoginScreen extends ConsumerStatefulWidget {
   const FirstLoginScreen({super.key});
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<FirstLoginScreen> createState() => _FirstLoginScreenState();
+}
+
+class _FirstLoginScreenState extends ConsumerState<FirstLoginScreen> {
+  bool isAllDetailFilled = false;
+  int count = 0;
+  void checkAllFields() {
+    var player = ref.read(playerProvider);
+    print('values are : ${player.firstName} ${player.lastName}');
+    if (player.firstName.isNotEmpty &&
+        player.lastName.trim().isNotEmpty &&
+        player.email.trim().isNotEmpty) {
+      setState(() {
+        isAllDetailFilled = true;
+      });
+    } else {
+      setState(() {
+        isAllDetailFilled = false;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var player = ref.watch(playerProvider);
     return Scaffold(
       body: Expanded(
         child: Container(
@@ -63,13 +90,37 @@ class FirstLoginScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 20),
                   TextfieldLogin(
-                    onChange: (value) {},
+                    onChange: (value) {
+                      player = player.copyWith(firstName: value.trim());
+                      ref
+                          .read(playerProvider.notifier)
+                          .update((state) => player);
+                      if (value.trim().isNotEmpty) {
+                        checkAllFields();
+                      } else {
+                        setState(() {
+                          isAllDetailFilled = false;
+                        });
+                      }
+                    },
                     aboveText: 'First Name',
                     hintText: 'Enter your First Name',
                     textInputType: TextInputType.name,
                   ),
                   TextfieldLogin(
-                    onChange: (value) {},
+                    onChange: (value) {
+                      player = player.copyWith(lastName: value.trim());
+                      ref
+                          .read(playerProvider.notifier)
+                          .update((state) => player);
+                      if (value.trim().isNotEmpty) {
+                        checkAllFields();
+                      } else {
+                        setState(() {
+                          isAllDetailFilled = false;
+                        });
+                      }
+                    },
                     aboveText: 'Last Name',
                     hintText: 'Enter your Last Name',
                     textInputType: TextInputType.name,
@@ -78,7 +129,19 @@ class FirstLoginScreen extends ConsumerWidget {
                     aboveText: 'E-mail',
                     hintText: 'Enter your E-mail',
                     textInputType: TextInputType.emailAddress,
-                    onChange: (value) {},
+                    onChange: (value) {
+                      player = player.copyWith(email: value.trim());
+                      ref
+                          .read(playerProvider.notifier)
+                          .update((state) => player);
+                      if (value.trim().isNotEmpty) {
+                        checkAllFields();
+                      } else {
+                        setState(() {
+                          isAllDetailFilled = false;
+                        });
+                      }
+                    },
                   ), //TextField for email
                   const SizedBox(
                     height: 20,
@@ -89,16 +152,25 @@ class FirstLoginScreen extends ConsumerWidget {
                       children: [
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const SecondLoginScreen(),
-                              ),
-                            );
+                            if (isAllDetailFilled) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const SecondLoginScreen(),
+                                ),
+                              );
+                            } else {
+                              MyScaffoldMessage().showScaffoldMessenge(
+                                  context: context,
+                                  content: 'Enter All the Details');
+                            }
                           },
-                          child: const Text(
+                          child: Text(
                             'Next > >',
                             style: TextStyle(
-                              color: Color(0xFFC01A60),
+                              color: isAllDetailFilled
+                                  ? Color(0xFFC01A60)
+                                  : Colors.grey,
                               fontSize: 15,
                               fontFamily: 'Open Sans',
                               fontWeight: FontWeight.w500,
