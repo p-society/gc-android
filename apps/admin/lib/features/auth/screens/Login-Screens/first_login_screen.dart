@@ -14,8 +14,10 @@ class FirstLoginScreen extends ConsumerStatefulWidget {
 
 class _FirstLoginScreenState extends ConsumerState<FirstLoginScreen> {
   bool isAllDetailFilled = false;
+  final _scrollController = ScrollController();
   int count = 0;
   void checkAllFields() {
+    scrollToBottom();
     var player = ref.read(playerProvider);
     print('values are : ${player.firstName} ${player.lastName}');
     if (player.firstName.isNotEmpty &&
@@ -29,6 +31,14 @@ class _FirstLoginScreenState extends ConsumerState<FirstLoginScreen> {
         isAllDetailFilled = false;
       });
     }
+  }
+
+  void scrollToBottom() {
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      duration: Duration(milliseconds: 3),
+      curve: Curves.easeInOut,
+    );
   }
 
   @override
@@ -53,6 +63,7 @@ class _FirstLoginScreenState extends ConsumerState<FirstLoginScreen> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(40.0, 0, 40, 0.0),
             child: SingleChildScrollView(
+              controller: _scrollController,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
