@@ -67,12 +67,14 @@ class _SignUpPageState extends State<SignUpPage> {
 
                           const SizedBox(height: 20),
                           TextfieldLogin(
+                            initailValue: '',
                             onChange: (val) {},
                             textInputType: TextInputType.emailAddress,
                             aboveText: 'E-mail',
                             hintText: 'Enter your E-mail',
                           ), //TextField for email
                           TextfieldLogin(
+                            initailValue: '',
                             textInputType: TextInputType.visiblePassword,
                             aboveText: 'Password',
                             onChange: (val) {},

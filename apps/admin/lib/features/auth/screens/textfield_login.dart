@@ -7,6 +7,7 @@ class TextfieldLogin extends StatefulWidget {
   final ValueChanged<String> onChange;
   final bool obscureText;
   final bool isPassword;
+  final String initailValue;
   const TextfieldLogin({
     super.key,
     required this.aboveText,
@@ -15,6 +16,7 @@ class TextfieldLogin extends StatefulWidget {
     required this.onChange,
     this.obscureText = false,
     this.isPassword = false,
+    required this.initailValue,
   });
 
   @override
@@ -27,6 +29,12 @@ class _TextfieldLoginState extends State<TextfieldLogin> {
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.text = widget.initailValue;
   }
 
   bool _obscureText = false;
@@ -47,6 +55,7 @@ class _TextfieldLoginState extends State<TextfieldLogin> {
           onChanged: widget.onChange,
           controller: _controller,
           obscureText: _obscureText,
+          keyboardType: widget.textInputType,
           decoration: InputDecoration(
               hintText: widget.hintText,
               filled: true,

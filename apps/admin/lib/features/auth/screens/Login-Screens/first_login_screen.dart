@@ -14,8 +14,20 @@ class FirstLoginScreen extends ConsumerStatefulWidget {
 
 class _FirstLoginScreenState extends ConsumerState<FirstLoginScreen> {
   bool isAllDetailFilled = false;
+  @override
+  void initState() {
+    super.initState();
+    var player = ref.read(playerProvider);
+    if (player.firstName.trim().isNotEmpty &&
+        player.lastName.trim().isNotEmpty &&
+        player.email.trim().isNotEmpty) {
+      setState(() {
+        isAllDetailFilled = true;
+      });
+    }
+  }
+
   final _scrollController = ScrollController();
-  int count = 0;
   void checkAllFields() {
     scrollToBottom();
     var player = ref.read(playerProvider);
@@ -39,6 +51,12 @@ class _FirstLoginScreenState extends ConsumerState<FirstLoginScreen> {
       duration: Duration(milliseconds: 3),
       curve: Curves.easeInOut,
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -101,6 +119,7 @@ class _FirstLoginScreenState extends ConsumerState<FirstLoginScreen> {
                   ),
                   const SizedBox(height: 20),
                   TextfieldLogin(
+                    initailValue: player.firstName,
                     onChange: (value) {
                       player = player.copyWith(firstName: value.trim());
                       ref
@@ -119,6 +138,7 @@ class _FirstLoginScreenState extends ConsumerState<FirstLoginScreen> {
                     textInputType: TextInputType.name,
                   ),
                   TextfieldLogin(
+                    initailValue: player.lastName,
                     onChange: (value) {
                       player = player.copyWith(lastName: value.trim());
                       ref
@@ -137,6 +157,7 @@ class _FirstLoginScreenState extends ConsumerState<FirstLoginScreen> {
                     textInputType: TextInputType.name,
                   ), //TextField for name
                   TextfieldLogin(
+                    initailValue: player.email,
                     aboveText: 'E-mail',
                     hintText: 'Enter your E-mail',
                     textInputType: TextInputType.emailAddress,

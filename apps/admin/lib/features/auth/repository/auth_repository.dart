@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-final AuthRepositoryProvider = Provider(
+final authRepositoryProvider = Provider(
   (ref) {
     String gUrl = dotenv.get('GENERAL_URL');
     return AuthRepository(
@@ -23,25 +23,9 @@ class AuthRepository {
   ProviderRef ref;
   AuthRepository({required this.url, required this.ref});
   Future clickRegister(Player player, BuildContext context) async {
-    print('Click Register Button');
-    Map<String, dynamic> decoded = {
-      "email": "b122079@iiit-bh.ac.in",
-      "firstName": "Soubhik",
-      "lastName": "Gon",
-      "password": "b422056",
-      "role": 32768,
-      "sport": "football",
-      "branch": "it",
-      "year": 2,
-      "contactNo": "6370462354",
-      "socials": [
-        {"instagram": "soubhikgon_", "linkedin": "soubhikgon"}
-      ]
-    };
-
+    Map<String, dynamic> decoded = player.toMap();
     String myData = jsonEncode(decoded);
     try {
-      print('Enter in Try block Register Button');
       MyScaffoldMessage()
           .showScaffoldMessenge(context: context, content: player.password);
       var response = await http.post(
