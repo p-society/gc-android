@@ -239,6 +239,7 @@ class _LoginPageAdminState extends ConsumerState<LoginPageAdmin> {
                                 context,
                               )
                               .then((value) {
+                            print(player.email);
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                 builder: (context) => const OtpPage(),
