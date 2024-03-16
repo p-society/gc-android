@@ -22,7 +22,7 @@ class _OtpPageState extends ConsumerState<OtpPage> {
 
   void navController() {
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => LoginPageAdmin()));
+        MaterialPageRoute(builder: (context) =>const LoginPageAdmin()));
   }
 
   @override
@@ -106,7 +106,6 @@ class _OtpPageState extends ConsumerState<OtpPage> {
                 length: 6,
                 validator: (s) {
                   var player = ref.read(playerProvider);
-                  print(player.email);
                   MyScaffoldMessage().showScaffoldMessenge(
                       context: context, content: player.email);
                   return s;

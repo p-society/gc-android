@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final  commonSharedPreferenceControllerProvider = Provider<CommonSharedPreferenceController>((ref) {
   final repository =
-      ref.read(CommonSharedPreferenceRepositoryProvider) as CommonSharedPreferenceRepository;
+      ref.read(commonSharedPreferenceRepositoryProvider) as CommonSharedPreferenceRepository;
   return CommonSharedPreferenceController(
       commonSharedPreferenceRepository: repository);
 });

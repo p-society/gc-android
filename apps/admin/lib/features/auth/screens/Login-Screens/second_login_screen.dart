@@ -43,7 +43,6 @@ class _SecondLoginScreenState extends ConsumerState<SecondLoginScreen> {
   void checkAllFields() {
     backTobottom();
     var player = ref.read(playerProvider);
-    print('values are : ${player.firstName} ${player.lastName}');
     if (player.branch.isNotEmpty &&
         player.sport.trim().isNotEmpty &&
         player.role.trim().isNotEmpty) {
@@ -61,156 +60,148 @@ class _SecondLoginScreenState extends ConsumerState<SecondLoginScreen> {
   Widget build(BuildContext context) {
     Player player = ref.watch(playerProvider);
     return Scaffold(
-      body: Expanded(
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              //aplying gradient
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF171D45),
-                Color(0xFF161A3A),
-                Color(0xFF111114),
-              ],
-            ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            //aplying gradient
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF171D45),
+              Color(0xFF161A3A),
+              Color(0xFF111114),
+            ],
           ),
-          height: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(40.0, 0, 40, 0.0),
-            child: SingleChildScrollView(
-              controller: _scrollController,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 70,
+        ),
+        height: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(40.0, 0, 40, 0.0),
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 70,
+                ),
+                const Text(
+                  'Create your Account',
+                  style: TextStyle(
+                    color: Color(0xFFE0DADD),
+                    fontSize: 28,
+                    fontFamily: 'Open Sans',
+                    fontWeight: FontWeight.w800,
+                    height: 0,
                   ),
-                  const Text(
-                    'Create your Account',
-                    style: TextStyle(
-                      color: Color(0xFFE0DADD),
-                      fontSize: 28,
-                      fontFamily: 'Open Sans',
-                      fontWeight: FontWeight.w800,
-                      height: 0,
+                ),
+                const Text(
+                  'Fill in the details to create your account',
+                  style: TextStyle(
+                    color: Color(0xFFBAAFBB),
+                    fontSize: 16,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                    height: 0,
+                  ),
+                ),
+                const SizedBox(
+                  height: 18,
+                ),
+                const AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: Image(
+                    image: AssetImage(
+                      'assets/images/sports_illustration_gCSB.png',
                     ),
                   ),
-                  const Text(
-                    'Fill in the details to create your account',
-                    style: TextStyle(
-                      color: Color(0xFFBAAFBB),
-                      fontSize: 16,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                      height: 0,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 18,
-                  ),
-                  const AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: Image(
-                      image: AssetImage(
-                        'assets/images/sports_illustration_gCSB.png',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  TextfieldLogin(
-                    initailValue: player.branch,
-                    onChange: (value) {
-                      player = player.copyWith(branch: value.trim().toString());
-                      ref
-                          .read(playerProvider.notifier)
-                          .update((state) => player);
-                      checkAllFields();
-                    },
-                    aboveText: 'Branch Name',
-                    hintText: 'Enter your Branch Name',
-                    textInputType: TextInputType.name,
-                  ),
-                  TextfieldLogin(
-                    initailValue: player.sport,
-                    aboveText: 'Sport',
-                    hintText: 'Enter your Sport',
-                    textInputType: TextInputType.emailAddress,
-                    onChange: (value) {
-                      player = player.copyWith(sport: value.trim().toString());
-                      ref
-                          .read(playerProvider.notifier)
-                          .update((state) => player);
-                      checkAllFields();
-                    },
-                  ), //TextField for Sport
-                  TextfieldLogin(
-                    initailValue: player.role,
-                    onChange: (value) {
-                      player = player.copyWith(role: value.trim().toString());
-                      ref
-                          .read(playerProvider.notifier)
-                          .update((state) => player);
-                      checkAllFields();
-                    },
-                    aboveText: 'Role',
-                    hintText: 'Enter your Role Name',
-                    textInputType: TextInputType.name,
-                  ), //TextField for Role
-                  const SizedBox(
-                    height: 20,
-                  ),
+                ),
+                const SizedBox(height: 20),
+                TextfieldLogin(
+                  initailValue: player.branch,
+                  onChange: (value) {
+                    player = player.copyWith(branch: value.trim().toString());
+                    ref.read(playerProvider.notifier).update((state) => player);
+                    checkAllFields();
+                  },
+                  aboveText: 'Branch Name',
+                  hintText: 'Enter your Branch Name',
+                  textInputType: TextInputType.name,
+                ),
+                TextfieldLogin(
+                  initailValue: player.sport,
+                  aboveText: 'Sport',
+                  hintText: 'Enter your Sport',
+                  textInputType: TextInputType.emailAddress,
+                  onChange: (value) {
+                    player = player.copyWith(sport: value.trim().toString());
+                    ref.read(playerProvider.notifier).update((state) => player);
+                    checkAllFields();
+                  },
+                ), //TextField for Sport
+                TextfieldLogin(
+                  initailValue: player.role,
+                  onChange: (value) {
+                    player = player.copyWith(role: value.trim().toString());
+                    ref.read(playerProvider.notifier).update((state) => player);
+                    checkAllFields();
+                  },
+                  aboveText: 'Role',
+                  hintText: 'Enter your Role Name',
+                  textInputType: TextInputType.name,
+                ), //TextField for Role
+                const SizedBox(
+                  height: 20,
+                ),
 
-                  Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text(
-                            '< < Previous',
-                            style: TextStyle(
-                              color: Color(0xFFC01A60),
-                              fontSize: 15,
-                              fontFamily: 'Open Sans',
-                              fontWeight: FontWeight.w500,
-                              height: 0,
-                            ),
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text(
+                          '< < Previous',
+                          style: TextStyle(
+                            color: Color(0xFFC01A60),
+                            fontSize: 15,
+                            fontFamily: 'Open Sans',
+                            fontWeight: FontWeight.w500,
+                            height: 0,
                           ),
                         ),
-                        TextButton(
-                          onPressed: () {
-                            if (isAllDetailFilled) {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => const LoginPageAdmin(),
-                                ),
-                              );
-                            } else {
-                              MyScaffoldMessage().showScaffoldMessenge(
-                                  context: context, content: 'Fill All Detail');
-                            }
-                          },
-                          child: Text(
-                            'Next > >',
-                            style: TextStyle(
-                              color: isAllDetailFilled
-                                  ? const Color(0xFFC01A60)
-                                  : Colors.grey,
-                              fontSize: 15,
-                              fontFamily: 'Open Sans',
-                              fontWeight: FontWeight.w500,
-                              height: 0,
-                            ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          if (isAllDetailFilled) {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const LoginPageAdmin(),
+                              ),
+                            );
+                          } else {
+                            MyScaffoldMessage().showScaffoldMessenge(
+                                context: context, content: 'Fill All Detail');
+                          }
+                        },
+                        child: Text(
+                          'Next > >',
+                          style: TextStyle(
+                            color: isAllDetailFilled
+                                ? const Color(0xFFC01A60)
+                                : Colors.grey,
+                            fontSize: 15,
+                            fontFamily: 'Open Sans',
+                            fontWeight: FontWeight.w500,
+                            height: 0,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

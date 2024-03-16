@@ -8,7 +8,7 @@ class MyScrollController {
   void scrolltoBottom() {
     controller.animateTo(
       controller.position.maxScrollExtent,
-      duration: Duration(milliseconds: 30),
+      duration:const Duration(milliseconds: 30),
       curve: Curves.easeInOut,
     );
   }
