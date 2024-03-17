@@ -1,5 +1,5 @@
 import 'package:admin/constants/scaffold_messenger.dart';
-import 'package:admin/features/auth/repository/player_provider.dart';
+import 'package:admin/features/auth/repository/auth_repository.dart';
 import 'package:admin/features/auth/screens/login_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,7 +22,7 @@ class _OtpPageState extends ConsumerState<OtpPage> {
 
   void navController() {
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) =>const LoginPageAdmin()));
+        MaterialPageRoute(builder: (context) => const LoginPageAdmin()));
   }
 
   @override
@@ -104,11 +104,28 @@ class _OtpPageState extends ConsumerState<OtpPage> {
                 submittedPinTheme: submittedPinTheme,
                 controller: otpController,
                 length: 6,
-                validator: (s) {
-                  var player = ref.read(playerProvider);
+                onSubmitted: (s) {
                   MyScaffoldMessage().showScaffoldMessenge(
-                      context: context, content: player.email);
-                  return s;
+                    context: context,
+                    content: s,
+                  );
+                  ref
+                      .read(authRepositoryProvider)
+                      .verifyOtp(s.toString())
+                      .onError(
+                        (error, stackTrace) =>
+                            MyScaffoldMessage().showScaffoldMessenge(
+                          context: context,
+                          content: error.toString(),
+                        ),
+                      )
+                      .then((value) {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const HomeScreen(),
+                      ),
+                    );
+                  });
                 },
                 closeKeyboardWhenCompleted: true,
                 pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
@@ -132,10 +149,7 @@ class _OtpPageState extends ConsumerState<OtpPage> {
                     ),
                   ),
                   GestureDetector(
-                    //making signup text clickabe
-                    onTap: () {
-                      //print('signup clicked');
-                    },
+                    onTap: () {},
                     child: const Text(
                       'Resend',
                       style: TextStyle(
@@ -152,6 +166,19 @@ class _OtpPageState extends ConsumerState<OtpPage> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: Text('Welcome to Home'),
       ),
     );
   }
