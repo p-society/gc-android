@@ -1,4 +1,5 @@
 import 'package:admin/constants/scaffold_messenger.dart';
+import 'package:admin/features/auth/controller/auth_controller.dart';
 import 'package:admin/features/auth/repository/auth_repository.dart';
 import 'package:admin/features/auth/screens/login_admin.dart';
 import 'package:flutter/material.dart';
@@ -104,27 +105,28 @@ class _OtpPageState extends ConsumerState<OtpPage> {
                 submittedPinTheme: submittedPinTheme,
                 controller: otpController,
                 length: 6,
-                onSubmitted: (s) {
+                onSubmitted: (s) async{
                   MyScaffoldMessage().showScaffoldMessenge(
                     context: context,
                     content: s,
                   );
                   ref
-                      .read(authRepositoryProvider)
+                      .watch(authControllerProvider)
                       .verifyOtp(s.toString())
-                      .onError(
-                        (error, stackTrace) =>
-                            MyScaffoldMessage().showScaffoldMessenge(
-                          context: context,
-                          content: error.toString(),
-                        ),
-                      )
                       .then((value) {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
-                      ),
-                    );
+                    Navigator.of(context)
+                        .push(
+                          MaterialPageRoute(
+                            builder: (context) => const HomeScreen(),
+                          ),
+                        )
+                        .onError(
+                          (error, _) =>
+                              MyScaffoldMessage().showScaffoldMessenge(
+                            context: context,
+                            content: error.toString(),
+                          ),
+                        );
                   });
                 },
                 closeKeyboardWhenCompleted: true,
