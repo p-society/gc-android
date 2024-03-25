@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:admin/DataBase/database_helper_class.dart';
 import 'package:admin/constants/scaffold_messenger.dart';
 import 'package:admin/models/player_model.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +44,7 @@ class AuthRepository {
         throw ('this is an error');
       }
     } catch (e) {
-      rethrow;
+      throw(e.toString());
     }
   }
 
@@ -84,7 +82,7 @@ class AuthRepository {
     "updatedAt": "2024-03-16T12:19:34.918Z",
     "__v": 0
 }*/
-          Map<String, dynamic> map = jsonDecode(response.body);
+          // Map<String, dynamic> map = jsonDecode(response.body);
           return;
         } else {
           throw Exception('Network Error');

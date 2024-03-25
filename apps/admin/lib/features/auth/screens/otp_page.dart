@@ -1,6 +1,5 @@
 import 'package:admin/constants/scaffold_messenger.dart';
 import 'package:admin/features/auth/controller/auth_controller.dart';
-import 'package:admin/features/auth/repository/auth_repository.dart';
 import 'package:admin/features/auth/screens/login_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

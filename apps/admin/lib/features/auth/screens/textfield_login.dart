@@ -49,9 +49,10 @@ class _TextfieldLoginState extends State<TextfieldLogin> {
         ),
         Text(
           widget.aboveText,
-          style: const TextStyle(color: Colors.white),
+          style: Theme.of(context).textTheme.bodyLarge,
         ),
         TextField(
+          style: Theme.of(context).textTheme.bodyMedium,
           onChanged: widget.onChange,
           controller: _controller,
           obscureText: _obscureText,

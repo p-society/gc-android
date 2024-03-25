@@ -13,32 +13,11 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     final Size pageSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF111114),
-        elevation: 0,
-        foregroundColor: Colors.white,
-      ),
-      resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         child: ConstrainedBox(
           constraints: BoxConstraints(maxHeight: pageSize.height - 80),
-          child: Container(
-            padding: const EdgeInsets.only(
-              left: 40,
-              right: 40,
-            ),
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                //aplying gradient
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color(0xFF111114),
-                  Color(0xFF161A3A),
-                  Color(0xFF171D45),
-                ],
-              ),
-            ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
                 SizedBox(height: pageSize.height / 4),
