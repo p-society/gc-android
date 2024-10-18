@@ -12,4 +12,6 @@ class AppColors {
   static const Color authFieldsBackgroundColor = Color(0xFF333333);
 
   static const Color authFieldsForegroundColor = Color(0x80E0E0E0);
+
+  static const Color authPagebackgroundColor = Color(0xFF121212);
 }

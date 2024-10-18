@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gc_user/ui/screens/auth_login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,11 +23,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
-        child: Center(
-        ),
-      ),
-    );
+    return const Scaffold(body: AuthLoginScreen());
   }
 }

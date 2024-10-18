@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gc_user/core/style/colors.dart';
+import 'package:gc_user/core/style/sizes.dart';
 import 'package:gc_user/core/style/typography.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomAuthTextField extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final TextEditingController controller;
   final bool obsecureText;
-  const CustomTextField({
+  const CustomAuthTextField({
     super.key,
     required this.hintText,
     required this.icon,
@@ -21,17 +22,24 @@ class CustomTextField extends StatelessWidget {
       obscureText: obsecureText,
       controller: controller,
       decoration: InputDecoration(
-          prefixIcon: Icon(
-            icon,
-            color: AppColors.authFieldsForegroundColor,
+        prefixIcon: Icon(
+          icon,
+          color: AppColors.authFieldsForegroundColor,
+        ),
+        hintText: hintText,
+        filled: true,
+        fillColor: AppColors.authFieldsBackgroundColor,
+        hintStyle: AppTypography.authFieldTextStyle,
+        constraints: BoxConstraints(
+          maxWidth: AppComponestsSizes(context)
+              .runningDeviceDimensionAdjustedWidth(305),
+        ),
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(15),
           ),
-          hintText: hintText,
-          filled: true,
-          fillColor: AppColors.authFieldsBackgroundColor,
-          hintStyle: AppTypography.authFieldTextStyle,
-          constraints: const BoxConstraints(maxWidth: 333),
-          border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(15)))),
+        ),
+      ),
     );
   }
 }

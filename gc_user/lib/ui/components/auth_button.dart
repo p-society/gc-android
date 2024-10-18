@@ -3,10 +3,10 @@ import 'package:gc_user/core/style/colors.dart';
 import 'package:gc_user/core/style/sizes.dart';
 import 'package:gc_user/core/style/typography.dart';
 
-class CustomButton extends StatelessWidget {
+class CustomAuthButton extends StatelessWidget {
   final bool isDisabled;
   final String buttonText;
-  const CustomButton({
+  const CustomAuthButton({
     super.key,
     required this.buttonText,
     required this.isDisabled,
@@ -17,7 +17,11 @@ class CustomButton extends StatelessWidget {
     return TextButton(
       onPressed: () {},
       style: TextButton.styleFrom(
-        fixedSize: AppComponestsSizes.authComponentsSize,
+        fixedSize: Size(
+            AppComponestsSizes(context)
+                .runningDeviceDimensionAdjustedWidth(303),
+            AppComponestsSizes(context)
+                .runningDeviceDimensionAdjustedHeight(43.6)),
         foregroundColor: AppColors.authButtonForegroundColor,
         backgroundColor: isDisabled
             ? AppColors.authButtonDisabledBackgroundColor
